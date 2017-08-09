@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="crudApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.6.0/angular-local-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/UserService.js"></script>
+    <script src="/js/UserController.js"></script>
+    <link href="/css/app.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div ng-controller="UserController">
+    <div class="generic-container">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="lead">ADD USERS:</span></div>
+            <div class="panel-body">
+                <div class="formController">
+                    <div class="alert alert-success" role="alert" ng-if="successMessage">{{successMessage}}</div>
+                    <div class="alert alert-danger" role="alert" ng-if="errorMessage">{{errorMessage}}</div>
+                    <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                        <!--<input type="hidden" ng-model="user.id"/>-->
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label class="col-md-2 control-label" for="uname">Name</label>
+                                <div class="col-md-7">
+                                    <input type="text" ng-model="user.name" id="uname" class="username form-control input-sm"
+                                       placeholder="Enter Your Name" required ng-minlength="3"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label class="col-md-2 control-label" for="age">Age</label>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="user.age" id="age" class="form-control input-sm"
+                                      placeholder="Enter Your age"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label class="col-md-2 control-label" for="salary">SALARY</label>
+                                <div class="col-md-2">
+                                    <input type="text" ng-model="user.salary" id="salary" class="form-control input-sm"
+                                      placeholder="Enter Your Salary"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-action floatRight">
+                                <input type="submit" value="{{!user.id ? 'Add' : 'Update'}}"
+                                       class="btn btn-primary active" ng-click="createOrUpdateUser()"/>
+                                <button type="button" ng-click="reset()" class="btn btn-warning btn-sm">Reset Form
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!--<button ng-click="getAllUsers()"> Show All Users </button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><span>LIST OF ALL EXISTING USERS:</span></div>
+        <div class="panel-body">
+            <div class="table-responsive" ng-init="getAllUsers()">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>AGE</th>
+                        <th>SALARY</th>
+                        <th width="100"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="u in users">
+                        <td>{{u.id}}</td>
+                        <td>{{u.name}}</td>
+                        <td>{{u.age}}</td>
+                        <td>{{u.salary}}</td>
+                        <td><button type="button" ng-click="editUser(u.id, u)" class="btn btn-success custom-width">EDIT</button></td>
+                        <td><button type="button" ng-click="removeUser(u.id)" class="btn btn-danger custom-width">REMOVE</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
