@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.CustomErrorType;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.slf4j.Logger;
@@ -15,14 +14,14 @@ import java.util.List;
 @RequestMapping("/api")
 public class RestApiController {
 
-    public static final Logger logger= LoggerFactory.getLogger(RestApiController.class);
+    private static final Logger logger= LoggerFactory.getLogger(RestApiController.class);
 
     @Autowired
     UserService userService;
 
 
     //---------Retrieve all Users--------
-    @GetMapping(value ="/users/list")
+    @GetMapping(value ="/user/")
     public ResponseEntity<List<User>>listAllUsers(){
         List<User> users = userService.findAllUsers();
         if(users.isEmpty()){
@@ -49,7 +48,7 @@ public class RestApiController {
 
 
     //-------Create New User-----------
-    @PostMapping(value ="/user/add/")
+    @PostMapping(value ="/user/")
     public ResponseEntity<?> createOrUpdateUser(@RequestBody User user){
         logger.info("Creating User: {}", user);
 

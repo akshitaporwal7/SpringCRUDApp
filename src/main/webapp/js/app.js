@@ -16,7 +16,7 @@
                     users: function ($q, UserService) {
                         console.log('Load all Users');
                         var deferred=$q.defer();
-                        UserService.loadAllUsers().then(deferred.resolve, deferred.resolve);
+                        UserService.getAllUsers().then(deferred.resolve, deferred.resolve);
                         return deferred.promise;
                     }
                 }

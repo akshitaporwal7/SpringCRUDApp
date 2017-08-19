@@ -2,8 +2,8 @@
 'use strict';
 
  angular.module('crudApp').factory('UserService',
-    ['$localStorage', '$http', '$q', 'urls',
-        function ($localStorage, $http, $q, urls) {
+    ['$localStorage', '$http', '$q',
+        function ($localStorage, $http, $q) {
 
         var factory={
             getAllUsers: getAllUsers,
@@ -16,7 +16,7 @@
 
         function getAllUsers() {
             var deferred= $q.defer();
-            $http.get('/api/users/list')
+            $http.get('/api/user/')
                 .then(
                     function (response) {
                         console.log('Fetched successfully all Users');
@@ -50,15 +50,15 @@
         function createUser(user) {
             console.log('Creating User');
             var deferred=$q.defer();
-            $http.post('/api/user/add/', user)
+            $http.post('/api/user/', user)
                 .then(
                     function (response) {
-                        loadAllUsers();
+                        getAllUsers();
                         deferred.resolve(response.data);
                     },
                     function (errResponse) {
                         if (errResponse)
-                        console.error('Error while creating User' +errResponse.data.errMessage);
+                        console.error('Error while creating User' +errResponse);
                         deferred.reject(errResponse);
                     }
                 );

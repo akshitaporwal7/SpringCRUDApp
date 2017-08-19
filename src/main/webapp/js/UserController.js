@@ -27,7 +27,7 @@ app.controller('UserController',['$scope', 'UserService', function ($scope, User
             console.log('Removing User with id:' + id);
             UserService.removeUser(id)
                 .then(
-                    function (response) {
+                    function () {
                         console.log('User with' + id + 'Removed Successfully');
                     },
                     function (errResponse) {
